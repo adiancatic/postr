@@ -1,0 +1,41 @@
+.page-authentication {
+    background-color: $gray100;
+    width: 100%;
+    min-height: 100vh;
+    padding-top: 4rem;
+
+    .container-wrapper {
+        background-color: $white;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 3rem 1rem;
+        border-radius: 16px;
+    }
+
+    .form-container {
+        max-width: 360px;
+        margin: 0 auto;
+    }
+
+    .logo-container {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 2rem;
+        .logo {
+            @include logo;
+        }
+    }
+
+    .auth-title {
+        text-align: center;
+    }
+
+    .button-wrapper {
+        display: flex;
+        justify-content: center;
+    }
+
+    .alert {
+        margin-top: 1rem;
+    }
+}
