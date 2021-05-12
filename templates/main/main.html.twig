@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <main>
+        {% include "nav.html.twig" %}
+        <div class="container">
+            {% block bodyContent %}{% endblock %}
+        </div>
+    </main>
+{% endblock %}

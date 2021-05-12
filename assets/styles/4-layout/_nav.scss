@@ -1,41 +1,25 @@
-.nav-container {
-    background-color: $gray100;
-    .nav {
-        display: flex;
+header {
+    background-color: $white;
+    display: flex;
+
+    .nav-container {
         height: 80px;
-        padding: 0 30px;
-        .nav-header {
-            display: flex;
-            align-items: center;
-            .nav-brand {
-                display: block;
-                width: 44px;
-                height: 60px;
-                background-size: contain;
-                background-repeat: no-repeat;
-                background-position: center;
-            }
-            .nav-toggle {
-                display: none;
-                //TODO: Add responsive
-            }
-        }
-        .nav-list-container {
-            margin-left: 30px;
-            .nav-list {
-                margin: 0;
-                padding: 0;
-                list-style: none;
-                display: flex;
-                height: 100%;
-                .nav-item {
-                    display: flex;
-                    .nav-link {
-                        display: flex;
-                        align-items: center;
-                    }
-                }
-            }
+        display: flex;
+        align-items: center;
+    }
+
+    .logo {
+        display: block;
+        @include logo(102, 44);
+    }
+
+    .nav-list {
+        display: flex;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        .nav-item {
+
         }
     }
 }
