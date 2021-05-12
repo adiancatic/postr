@@ -1,0 +1,39 @@
+/*
+ * Media Query To
+ */
+@mixin mqt($width) {
+    @media screen and (max-width: $width + 'px') {
+        @content;
+    }
+}
+
+/*
+ * Media Query From
+ */
+@mixin mqf($width) {
+    @media screen and (min-width: $width + 'px') {
+        @content;
+    }
+}
+
+/*
+ * Media Query Between
+ */
+@mixin mqb($min, $max) {
+    @media screen and (min-width: $min + 'px') and (max-width: $max + 'px') {
+        @content;
+    }
+}
+
+/*
+ * Logo
+ */
+@mixin logo($width: 127, $height: 54) {
+    display: block;
+    width: #{$width}px;
+    height: #{$height}px;
+    background-image: url("/assets/styles/assets/logo.svg");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}

@@ -1,0 +1,62 @@
+/*
+ * Colors
+ */
+$white: #FFF;
+
+$gray100: #F8F8F8;
+
+$gray200: #D9E0E7;
+$gray300: #C1CED8;
+$gray400: #97A2AE;
+$gray500: #6D7785;
+$gray600: #585F6B;
+$gray700: #434852;
+$gray800: #2E3039;
+$gray900: #191920;
+$black: #000;
+
+$blue-light: #0BC7F0;
+$blue-dark: #00AAFF;
+$blue-gradient: linear-gradient(45deg, rgba($blue-light, 1) 0%, rgba($blue-dark, 1) 100%);
+
+/*
+ * Transitions
+ */
+$tr-default: all .4s ease;
+
+
+/*
+ * Typography
+ */
+
+
+
+/*
+ * Font weights
+ */
+$fw-thin: 100;
+$fw-extra-light: 200;
+$fw-light: 300;
+$fw-regular: 400;
+$fw-medium: 500;
+$fw-semibold: 600;
+$fw-bold: 700;
+$fw-black: 800;
+
+
+/*
+ * Shadows
+ */
+
+
+/*
+ * Breakpoints
+ */
+$bp-lg: 1199;
+$bp-md: 991;
+$bp-sm: 767;
+$bp-xs: 577;
+
+/*
+ * Misc
+ */
