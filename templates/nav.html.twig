@@ -17,6 +17,18 @@
                 </li>
             </ul>
 
+            {% if app.user %}
+                <a href="{{ path("profile.index", {username: app.user.username}) }}" class="profile">
+                    <span class="avatar">{{ app.user.username|first }}</span>
+                    <span class="name">{{ app.user.username }}</span>
+                </a>
+            {% else %}
+                <div class="auth-cta">
+                    <a href="{{ path("app_login") }}" class="btn btn-primary">Login</a>
+                    <a href="{{ path("register") }}" class="btn btn-primary">Register</a>
+                </div>
+            {% endif %}
+
         </nav>
     </div>
 </header>

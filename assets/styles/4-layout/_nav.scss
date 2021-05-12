@@ -15,11 +15,31 @@ header {
 
     .nav-list {
         display: flex;
+        flex: 1;
         margin: 0;
         padding: 0;
         list-style: none;
         .nav-item {
 
+        }
+    }
+
+    .profile {
+        display: flex;
+        align-items: center;
+        .avatar {
+            width: 42px;
+            height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-transform: uppercase;
+            border-radius: 100%;
+            background-color: $gray200;
+            color: $gray800;
+        }
+        .name {
+            margin-left: 0.5rem;
         }
     }
 }
