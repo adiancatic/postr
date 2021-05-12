@@ -3,8 +3,8 @@
 {% block title %}Hello MainController!{% endblock %}
 
 {% block body %}
+    {% include "nav.html.twig" %}
     <main>
-        {% include "nav.html.twig" %}
         <div class="container">
             {% block bodyContent %}{% endblock %}
         </div>

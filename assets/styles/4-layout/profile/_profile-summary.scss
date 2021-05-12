@@ -1,0 +1,17 @@
+.profile-summary {
+    background-color: $white;
+    border-radius: 1rem;
+    padding: 1rem;
+    .avatar {
+        width: 4rem;
+        height: 4rem;
+        font-size: 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-transform: uppercase;
+        border-radius: 100%;
+        background-color: $gray200;
+        color: $gray800;
+    }
+}
