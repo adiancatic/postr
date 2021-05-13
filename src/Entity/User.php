@@ -130,6 +130,14 @@ class User implements UserInterface
         return $this->posts;
     }
 
+    /**
+     * @return string
+     */
+    public function getFullName()
+    {
+        return $this->username;
+    }
+
     public function addPost(Post $post): self
     {
         if (!$this->posts->contains($post)) {
