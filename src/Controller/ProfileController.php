@@ -27,7 +27,7 @@ class ProfileController extends AbstractController
             return new Response("404, not found", 404);
         }
 
-        $posts = $postRepository->findBy(["user_id" => $user->getId()]);
+        $posts = $postRepository->findByIdWithAuthors($user->getId());
 
         return $this->render("profile/index.html.twig", [
             "user" => $user,

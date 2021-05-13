@@ -1,11 +1,17 @@
 <article class="post-item">
-    {% if post.username is defined %}
-        <a href="{{ path("profile.index", {"username": post.username}) }}" class="avatar">Av</a>
-    {% else %}
-        <span class="avatar">Av</span>
-    {% endif %}
+    <a href="{{ path("profile.index", {"username": post.username}) }}" class="avatar">
+        {{ post.username|first }}
+    </a>
     <div class="post">
-        <div class="header">User</div>
+        <div class="header">
+            <div class="user-info">
+                <strong class="name">{{ post.username }}</strong>
+                <span class="username">@{{ post.username }}</span>
+            </div>
+            <div class="post-info">
+                {{ post.created_at|date("H:m") }}
+            </div>
+        </div>
         <div class="body">{{ post.content }}</div>
         <div class="footer">13 Likes</div>
     </div>

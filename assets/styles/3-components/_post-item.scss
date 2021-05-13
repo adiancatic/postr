@@ -16,6 +16,22 @@
         background-color: $gray100;
         margin-left: 0.875rem;
         border-radius: 0.5rem;
-        padding: 1.125rem 0.875rem;
+        padding: 0.875rem;
+        .header {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            .user-info {
+                font-size: 0.875rem;
+            }
+            .post-info {
+                font-size: 0.75rem;
+            }
+        }
+        .body {
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+        }
     }
 }
