@@ -18,3 +18,13 @@
         box-shadow: inset 0 0 0 500vw $blue-dark;
     }
 }
+
+.btn-ghost {
+    background-color: $white;
+    color: $gray600;
+    border: 1px solid $gray300;
+    &:hover, &:focus, &:active {
+        border-color: $blue-dark;
+        color: $blue-dark;
+    }
+}

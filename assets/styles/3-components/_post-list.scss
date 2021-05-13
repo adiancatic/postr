@@ -1,0 +1,8 @@
+.post-list {
+    background-color: $white;
+    border-radius: 1rem;
+    padding: 1.875rem 1.25rem;
+    .post-item:not(:last-child) {
+        margin-bottom: 1.5rem;
+    }
+}

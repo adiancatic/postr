@@ -23,12 +23,16 @@
                     </div>
 
                     <div class="col-xs-12 col-md-8">
-                        <h5>{{ user.username }}'s posts are:</h5>
-                        <ul>
-                            {% for post in posts %}
-                                <li>{{ post.content }}</li>
-                            {% endfor %}
-                        </ul>
+                        {% if posts %}
+                            <h5>{{ user.username }}'s posts are:</h5>
+                            <div class="post-list">
+                                {% for post in posts %}
+                                    {{ include("post/item.html.twig", {"post": post}) }}
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {# no posts #}
+                        {% endif %}
                     </div>
 
                 </div>
