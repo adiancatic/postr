@@ -1,6 +1,10 @@
 header {
     background-color: $white;
     display: flex;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: $bs-default;
 
     .nav-container {
         height: 80px;
