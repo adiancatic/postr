@@ -1,5 +1,9 @@
 <article class="post-item">
-    <a href="" class="avatar">Av</a>
+    {% if post.username is defined %}
+        <a href="{{ path("profile.index", {"username": post.username}) }}" class="avatar">Av</a>
+    {% else %}
+        <span class="avatar">Av</span>
+    {% endif %}
     <div class="post">
         <div class="header">User</div>
         <div class="body">{{ post.content }}</div>

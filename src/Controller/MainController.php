@@ -16,8 +16,8 @@ class MainController extends AbstractController
      */
     public function index(PostRepository $postRepository): Response
     {
-        $posts = $postRepository->findAll();
-
+        $posts = $postRepository->findAllWithAuthors();
+        dump($posts);
         return $this->render('main/index.html.twig', [
             'posts' => $posts,
         ]);

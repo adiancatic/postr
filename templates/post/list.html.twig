@@ -1,0 +1,7 @@
+{% if posts %}
+    <div class="post-list">
+        {% for post in posts %}
+            {{ include("post/item.html.twig", {"post": post}) }}
+        {% endfor %}
+    </div>
+{% endif %}
