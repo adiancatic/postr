@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Repository\RelationshipRepository;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -41,9 +42,21 @@ class User implements UserInterface
      */
     private $posts;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Relationship::class, mappedBy="follower")
+     */
+    private $following;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Relationship::class, mappedBy="followed")
+     */
+    private $followed_by;
+
     public function __construct()
     {
         $this->posts = new ArrayCollection();
+        $this->following = new ArrayCollection();
+        $this->followed_by = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -154,6 +167,66 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($post->getUserId() === $this) {
                 $post->setUserId(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Relationship[]
+     */
+    public function getFollowing(): Collection
+    {
+        return $this->following;
+    }
+
+    public function addFollowing(Relationship $following): self
+    {
+        if (!$this->following->contains($following)) {
+            $this->following[] = $following;
+            $following->setFollower($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFollowing(Relationship $following): self
+    {
+        if ($this->following->removeElement($following)) {
+            // set the owning side to null (unless already changed)
+            if ($following->getFollower() === $this) {
+                $following->setFollower(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Relationship[]
+     */
+    public function getFollowedBy(): Collection
+    {
+        return $this->followed_by;
+    }
+
+    public function addFollowedBy(Relationship $followedBy): self
+    {
+        if (!$this->followed_by->contains($followedBy)) {
+            $this->followed_by[] = $followedBy;
+            $followedBy->setFollowed($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFollowedBy(Relationship $followedBy): self
+    {
+        if ($this->followed_by->removeElement($followedBy)) {
+            // set the owning side to null (unless already changed)
+            if ($followedBy->getFollowed() === $this) {
+                $followedBy->setFollowed(null);
             }
         }
 

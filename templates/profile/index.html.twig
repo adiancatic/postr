@@ -3,7 +3,6 @@
 {% block title %}{{ user.fullName }}'s profile{% endblock %}
 
 {% block bodyContent %}
-
     <div class="profile">
         <div class="row">
             <div class="container">
@@ -12,12 +11,14 @@
                     <div class="col-xs-12 col-md-4">
                         <div class="profile-summary">
                             <div class="profile-header">
-                                <span class="avatar">{{ user.username|first }}</span>
+                                <div class="top">
+                                    <span class="avatar">{{ user.username|first }}</span>
+                                    {{ include("profile/components/follow-btn.html.twig") }}
+                                </div>
                                 <h5>{{ user.username }}</h5>
                             </div>
                             <div class="profile-footer">
-                                <a href="#" class="stat">0 Following</a>
-                                <a href="#" class="stat">0 Followers</a>
+                                {{ include("profile/components/follow-stats.html.twig") }}
                             </div>
                         </div>
                     </div>
@@ -34,5 +35,4 @@
             </div>
         </div>
     </div>
-
 {% endblock %}

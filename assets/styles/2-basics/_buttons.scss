@@ -7,6 +7,7 @@
     font-size: 0.875rem;
     height: 42px;
     min-width: 120px;
+    transition: $tr-default;
     &:hover, &:focus, &:active {
         outline: 0;
     }
@@ -26,5 +27,29 @@
     &:hover, &:focus, &:active {
         border-color: $blue-dark;
         color: $blue-dark;
+    }
+}
+
+.btn-follow {
+    @extend .btn-ghost;
+    background-image: $blue-gradient;
+    box-shadow: inset 0 0 0 500vw $white;
+    &:hover, &:focus, &:active {
+        box-shadow: none;
+        color: $white;
+    }
+}
+
+.btn-unfollow {
+    @extend .btn-primary;
+    &:hover, &:focus, &:active {
+        box-shadow: inset 0 0 0 500vw $red;
+        color: $white;
+        span {
+            display: none;
+        }
+        &::before {
+            content: "Unfollow";
+        }
     }
 }
