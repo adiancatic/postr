@@ -1,0 +1,17 @@
+<div class="post-create">
+    <h4 class="post-create-title">What's happening?</h4>
+
+    <div class="post-form">
+        {{ form_start(newPost) }}
+        <div class="post-content">
+            {{ form_row(newPost.content) }}
+        </div>
+        <div class="post-cta-section">
+            <div class="post-submit">
+                {{ form_row(newPost.submit) }}
+            </div>
+        </div>
+{#        {{ form_error(newPost) }}#}
+        {{ form_end(newPost) }}
+    </div>
+</div>

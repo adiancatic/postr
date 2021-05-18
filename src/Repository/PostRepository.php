@@ -29,6 +29,7 @@ class PostRepository extends ServiceEntityRepository
                     SELECT p.id, p.content, p.created_at, u.id as user, u.username
                     FROM App\Entity\Post p
                     JOIN App\Entity\User u WHERE p.user_id=u.id
+                    ORDER BY p.created_at DESC
             ")
             ->getResult();
     }
