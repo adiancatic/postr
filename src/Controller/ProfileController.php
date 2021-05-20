@@ -99,12 +99,13 @@ class ProfileController extends AbstractController
      * @param $username
      * @param PostRepository $postRepository
      * @return Response
+     * @throws \Exception
      */
     public function index($username, PostRepository $postRepository): Response
     {
         $this->profileUser = $this->userRepository->findOneBy(["username" => $username]);
         if(!$this->profileUser) {
-            return new Response("404, not found", 404);
+            throw $this->createNotFoundException("User not found");
         }
 
         $this->isFollowed = $this->relationshipRepository->isFollowed($this->profileUser->getId());
