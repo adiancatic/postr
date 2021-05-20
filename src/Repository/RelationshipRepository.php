@@ -41,6 +41,10 @@ class RelationshipRepository extends ServiceEntityRepository
 
     public function isFollowed($id)
     {
+        if(!$this->security->getUser()) {
+            return false;
+        }
+
         $relationships = $this->findBy([
             "follower" => $this->security->getUser()->getId(),
             "followed" => $id,

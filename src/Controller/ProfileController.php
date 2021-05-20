@@ -12,7 +12,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security;
-use Symfony\Component\Validator\Constraints\Date;
 
 /**
  * @Route("/u", name="profile.")
@@ -25,7 +24,6 @@ class ProfileController extends AbstractController
     protected $profileUser;
     protected $currentUser;
     protected $isFollowed;
-    protected $relationships;
 
     public function __construct(UserRepository $userRepository, RelationshipRepository $relationshipRepository, Security $security)
     {

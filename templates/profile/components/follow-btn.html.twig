@@ -1,5 +1,7 @@
-{% if isFollowed %}
-    <button type="button" class="btn btn-unfollow" onclick="followHandler({{ user.id }})"><span>Following</span></button>
-{% elseif app.user.id != user.id %}
-    <button type="button" class="btn btn-follow" onclick="followHandler({{ user.id }})"><span>Follow</span></button>
+{% if app.user != null %}
+    {% if isFollowed %}
+        <button type="button" class="btn btn-unfollow" onclick="followHandler({{ user.id }})"><span>Following</span></button>
+    {% elseif app.user.id != user.id %}
+        <button type="button" class="btn btn-follow" onclick="followHandler({{ user.id }})"><span>Follow</span></button>
+    {% endif %}
 {% endif %}

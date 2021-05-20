@@ -1,3 +1,5 @@
+{% set page = app.request.get('_route') %}
+
 <header>
     <div class="container">
         <nav class="nav-container">
@@ -6,7 +8,7 @@
 
             <ul class="nav-list">
                 <li class="nav-item">
-                    <a href="" class="nav-link">
+                    <a href="{{ path("home") }}" class="nav-link {{ page == "home" ? "active" }}">
                         Home
                     </a>
                 </li>
