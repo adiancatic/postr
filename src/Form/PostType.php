@@ -20,6 +20,7 @@ class PostType extends AbstractType
             ->add('submit', SubmitType::class, [
                 "label" => "Post",
                 "attr" => [
+                    "onclick" => "createPost(event)",
                     "class" => "btn btn-primary"
                 ]
             ])

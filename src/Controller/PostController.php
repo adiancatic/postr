@@ -3,10 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Post;
-use App\Entity\User;
-use App\Form\PostType;
-use App\Repository\RelationshipRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -17,36 +15,38 @@ use Symfony\Component\Security\Core\Security;
  */
 class PostController extends AbstractController
 {
-    /**
-     * @Route("/", name="index")
-     */
-    public function index(): Response
+    protected $security;
+
+    public function __construct(Security $security)
     {
-        return $this->render('post/index.html.twig', [
-            'controller_name' => 'PostController',
-        ]);
+        $this->security = $security;
     }
 
     /**
-     * @Route("/create", name="create")
+     * @Route("/create", name="create", methods={"POST"})
+     * @param Request $request
      * @return Response
      * @throws \Exception
      */
-    public function create()
+    public function create(Request $request)
     {
+        $params = [];
+        parse_str($request->get("formData"), $params);
+
+        if(!$params) return new Response("Invalid request", 400);
+        $params = $params["post"];
+
         $post = new Post();
 
         $post
-            ->setContent("Test")
+            ->setContent($params["content"])
             ->setCreatedAt(new \DateTime())
-            ->setUserId($this->getUser());
-
-        dump($post);
+            ->setUserId($this->security->getUser());
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($post);
-        // $em->flush();
+        $em->flush();
 
-        return new Response("Post was created.");
+        return new Response("Post successfully created", 200);
     }
 }

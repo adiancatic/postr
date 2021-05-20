@@ -19,3 +19,15 @@ window.followHandler = function followHandler(id) {
         $(".follow-stats").replaceWith(parsedData.followStats);
     });
 };
+
+window.createPost = function createPost(e) {
+    e.preventDefault();
+
+    const form = $(".post-create form");
+
+    $.post("/post/create", {
+        formData: form.serialize()
+    }).done(() => {
+        form.trigger("reset");
+    });
+};
