@@ -9,12 +9,12 @@
             <ul class="nav-list">
                 <li class="nav-item">
                     <a href="{{ path("home") }}" class="nav-link {{ page == "home" ? "active" }}">
-                        Home
+                        <i class="fad fa-home-alt"></i>Home
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="" class="nav-link">
-                        Explore
+                        <i class="fad fa-compass"></i>Explore
                     </a>
                 </li>
             </ul>
@@ -23,6 +23,9 @@
                 <a href="{{ path("profile.index", {username: app.user.username}) }}" class="profile">
                     <span class="avatar">{{ app.user.username|first }}</span>
                     <span class="name">{{ app.user.username }}</span>
+                </a>
+                <a href="{{ path("app_logout") }}" class="nav-link logout">
+                    <i class="fad fa-sign-out"></i>
                 </a>
             {% else %}
                 <div class="auth-cta">
