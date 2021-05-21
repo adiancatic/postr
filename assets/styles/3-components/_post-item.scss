@@ -27,6 +27,10 @@
             }
             .post-info {
                 font-size: 0.75rem;
+                color: $gray400;
+                i {
+                    margin-right: 4px;
+                }
             }
         }
         .body {

@@ -1,3 +1,11 @@
+{% if post.created_at > date("today") %}
+    {% set createdAtDate = "Today, #{post.created_at|date('H:i')}" %}
+{% elseif post.created_at > date("yesterday") and post.created_at < date("today") %}
+    {% set createdAtDate = "Yesterday" %}
+{% else %}
+    {% set createdAtDate = post.created_at|date("M d") %}
+{% endif %}
+
 <article class="post-item">
     <a href="{{ path("profile.index", {"username": post.username}) }}" class="avatar">
         {{ post.username|first }}
@@ -9,7 +17,7 @@
                 <span class="username">@{{ post.username }}</span>
             </div>
             <div class="post-info">
-                {{ post.created_at|date("H:m") }}
+                <i class="far fa-clock"></i>{{ createdAtDate }}
             </div>
         </div>
         <div class="body">{{ post.content }}</div>
