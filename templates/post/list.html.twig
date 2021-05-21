@@ -4,4 +4,9 @@
             {{ include("post/item.html.twig", {"post": post}) }}
         {% endfor %}
     </div>
+{% else %}
+    <div class="post-list no-posts">
+        <i class="fad fa-inbox"></i>
+        <h3 class="no-posts-title">There are no posts to show</h3>
+    </div>
 {% endif %}

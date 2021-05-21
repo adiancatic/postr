@@ -24,11 +24,7 @@
                     </div>
 
                     <div class="col-xs-12 col-md-8">
-                        {% if posts %}
-                            {{ include("post/list.html.twig", {"posts": posts}) }}
-                        {% else %}
-                            {# no posts #}
-                        {% endif %}
+                        {{ include("post/list.html.twig", {"posts": posts}) }}
                     </div>
 
                 </div>
