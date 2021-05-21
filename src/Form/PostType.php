@@ -15,7 +15,12 @@ class PostType extends AbstractType
     {
         $builder
             ->add('content', TextareaType::class, [
-                "label" => false
+                "label" => false,
+                "attr" => [
+                    "required" => "required",
+                    "minlength" => 1,
+                    "pattern" => "/^(^\\s)+$/"
+                ]
             ])
             ->add('submit', SubmitType::class, [
                 "label" => "Post",

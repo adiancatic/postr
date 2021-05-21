@@ -25,6 +25,16 @@ window.createPost = function createPost(e) {
 
     const form = $(".post-create form");
 
+    let textarea = $("textarea", form);
+    const pattern = new RegExp("^\\s*$");
+
+    if(pattern.test(textarea.val())) {
+        form.addClass("js-error");
+        return;
+    }
+
+    form.removeClass("js-error");
+
     $.post("/post/create", {
         formData: form.serialize()
     }).done((data) => {

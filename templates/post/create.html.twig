@@ -6,13 +6,14 @@
             {{ form_start(newPost) }}
             <div class="post-content">
                 {{ form_row(newPost.content) }}
+                <label class="error"><i class="fad fa-exclamation-triangle"></i>You can't submit a post containing only whitespace.</label>
             </div>
             <div class="post-cta-section">
                 <div class="post-submit">
                     {{ form_row(newPost.submit) }}
                 </div>
             </div>
-            {#        {{ form_error(newPost) }}#}
+            {#{{ form_error(newPost) }}#}
             {{ form_end(newPost) }}
         </div>
     </div>

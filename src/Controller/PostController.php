@@ -46,7 +46,7 @@ class PostController extends AbstractController
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($post);
-        $em->flush();
+        // $em->flush();
 
         $postData = $postRepository->getLast();
 
