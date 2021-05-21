@@ -75,6 +75,25 @@ class PostRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function getLast($limit = 1)
+    {
+        $result = $this->getEntityManager()
+            ->createQuery("
+                SELECT p.id, p.content, p.created_at, u.id as user, u.username
+                FROM \App\Entity\Post p
+                JOIN App\Entity\User u WHERE p.user_id = u.id
+                ORDER BY p.id DESC
+            ")
+            ->setMaxResults($limit)
+            ->getResult();
+
+        if($limit == 1) {
+            $result = reset($result);
+        }
+
+        return $result;
+    }
+
 
     // /**
     //  * @return Post[] Returns an array of Post objects

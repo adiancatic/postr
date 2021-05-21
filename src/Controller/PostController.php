@@ -3,8 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Post;
+use App\Repository\PostRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -25,10 +25,11 @@ class PostController extends AbstractController
     /**
      * @Route("/create", name="create", methods={"POST"})
      * @param Request $request
+     * @param PostRepository $postRepository
      * @return Response
      * @throws \Exception
      */
-    public function create(Request $request)
+    public function create(Request $request, PostRepository $postRepository)
     {
         $params = [];
         parse_str($request->get("formData"), $params);
@@ -47,6 +48,16 @@ class PostController extends AbstractController
         $em->persist($post);
         $em->flush();
 
-        return new Response("Post successfully created", 200);
+        $postData = $postRepository->getLast();
+
+        if(!$postData) {
+            return new Response("No records found", 400);
+        }
+
+        $return = $this->renderView("/post/item.html.twig", [
+            "post" => $postData,
+        ]);
+
+        return new Response($return, 200);
     }
 }

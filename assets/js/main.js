@@ -27,7 +27,23 @@ window.createPost = function createPost(e) {
 
     $.post("/post/create", {
         formData: form.serialize()
-    }).done(() => {
+    }).done((data) => {
         form.trigger("reset");
+        updatePostListWithLastPost(data);
     });
 };
+
+function updatePostListWithLastPost(postHtml) {
+    $(".post-list").prepend(postHtml);
+
+    let post = $(".post-list article:first-child");
+    const postHeight = post.outerHeight(true);
+
+    post
+        .wrap('<div class="post-wrapper"></div>')
+        .parent()
+        .css({"height": 0, "opacity": 0})
+        .animate({"height": postHeight, "opacity": 1}, function () {
+            $(this).children(":first-child").unwrap()
+        });
+}
