@@ -2,21 +2,45 @@
     background-color: $white;
     border-radius: 1rem;
     padding: 1rem;
-    .top {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        .avatar {
-            width: 4rem;
-            height: 4rem;
-            font-size: 1.5rem;
+    .profile-header {
+        .top {
             display: flex;
             align-items: center;
-            justify-content: center;
-            text-transform: uppercase;
-            border-radius: 100%;
-            background-color: $gray200;
-            color: $gray800;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            .avatar {
+                width: 4rem;
+                height: 4rem;
+                font-size: 1.5rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-transform: uppercase;
+                border-radius: 100%;
+                background-color: $gray200;
+                color: $gray800;
+            }
+        }
+    }
+    .profile-footer {
+        .follow-stats {
+            .stat {
+                color: $gray400;
+                transition: $tr-default;
+                strong {
+                    color: $gray700;
+                    transition: $tr-default;
+                }
+                &:not(:last-child) {
+                    margin-right: 0.5rem;
+                }
+                &:hover, &:focus, &:active {
+                    color: $blue-dark;
+                    strong {
+                        color: $blue-dark;
+                    }
+                }
+            }
         }
     }
 }
