@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Post;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Security\Core\Security;
 
 /**
  * @method Post|null find($id, $lockMode = null, $lockVersion = null)
@@ -14,9 +15,13 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class PostRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    protected $security;
+
+    public function __construct(ManagerRegistry $registry, Security $security)
     {
         parent::__construct($registry, Post::class);
+
+        $this->security = $security;
     }
 
     /**
@@ -38,12 +43,35 @@ class PostRepository extends ServiceEntityRepository
     {
         return $this->getEntityManager()
             ->createQuery("
-                    SELECT p.id, p.content, p.created_at, u.id as user, u.username
-                    FROM App\Entity\Post p
-                    JOIN App\Entity\User u WHERE p.user_id = :uid AND p.user_id=u.id
-                    ORDER BY p.created_at DESC
+                SELECT p.id, p.content, p.created_at, u.id as user, u.username
+                FROM App\Entity\Post p
+                JOIN App\Entity\User u
+                WHERE p.user_id = :id AND p.user_id = u.id
+                ORDER BY p.created_at DESC
             ")
-            ->setParameter("uid", $id)
+            ->setParameter("id", $id)
+            ->getResult();
+    }
+
+    public function getPostsFromFollowedUsers($id)
+    {
+        $followedUsers = $this->getEntityManager()
+            ->createQuery("
+                SELECT IDENTITY(r.followed)
+                FROM App\Entity\Relationship r
+                WHERE r.follower = :id AND r.active = 1
+            ")
+            ->getDQL();
+
+        return $this->getEntityManager()
+            ->createQuery("
+                SELECT p.id, p.content, p.created_at, u.id as user, u.username
+                FROM App\Entity\Post p
+                JOIN App\Entity\User u
+                WHERE u.id = p.user_id AND (p.user_id = :current_user OR p.user_id IN (" . $followedUsers . "))
+                ORDER BY p.created_at DESC
+            ")
+            ->setParameters(["id" => $id, "current_user" => $this->security->getUser()->getId()])
             ->getResult();
     }
 

@@ -9,9 +9,17 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
 
 class MainController extends AbstractController
 {
+    protected $security;
+
+    public function __construct(Security $security)
+    {
+        $this->security = $security;
+    }
+
     /**
      * @Route("/", name="home")
      * @param PostRepository $postRepository
@@ -37,7 +45,11 @@ class MainController extends AbstractController
             $em->flush();
         }
 
-        $posts = $postRepository->findAllWithAuthors();
+        if($this->security->getUser()) {
+            $posts = $postRepository->getPostsFromFollowedUsers($this->security->getUser()->getId());
+        } else {
+            $posts = $postRepository->findAllWithAuthors();
+        }
 
         return $this->render('main/index.html.twig', [
             "newPost" => $form->createView(),
