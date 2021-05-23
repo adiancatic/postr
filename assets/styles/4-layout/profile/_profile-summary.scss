@@ -34,12 +34,12 @@
                 &:not(:last-child) {
                     margin-right: 0.5rem;
                 }
-                &:hover, &:focus, &:active {
+                /*&:hover, &:focus, &:active {
                     color: $blue-dark;
                     strong {
                         color: $blue-dark;
                     }
-                }
+                }*/
             }
         }
     }
