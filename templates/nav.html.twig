@@ -6,33 +6,43 @@
 
             <a href="{{ path("home") }}" class="logo"></a>
 
-            {% if app.user %}
-                <ul class="nav-list">
-                    <li class="nav-item">
-                        <a href="{{ path("home") }}" class="nav-link {{ page == "home" ? "active" }}">
-                            <i class="fad fa-home-alt"></i>Home
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ path("explore") }}" class="nav-link {{ page == "explore" ? "active" }}">
-                            <i class="fad fa-compass"></i>Explore
-                        </a>
-                    </li>
-                </ul>
+            {#<button type="button" class="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>#}
 
-                <a href="{{ path("profile.index", {username: app.user.username}) }}" class="profile">
-                    <span class="avatar">{{ app.user.username|first }}</span>
-                    <span class="name">{{ app.user.username }}</span>
-                </a>
-                <a href="{{ path("app_logout") }}" class="nav-link logout">
-                    <i class="fad fa-sign-out"></i>
-                </a>
-            {% else %}
-                <div class="auth-cta">
-                    <a href="{{ path("app_login") }}" class="btn btn-primary">Login</a>
-                    <a href="{{ path("app_register") }}" class="btn btn-ghost">Register</a>
-                </div>
-            {% endif %}
+            <div class="nav-inner">
+                {% if app.user %}
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="{{ path("home") }}" class="nav-link {{ page == "home" ? "active" }}">
+                                <i class="fad fa-home-alt"></i>Home
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ path("explore") }}" class="nav-link {{ page == "explore" ? "active" }}">
+                                <i class="fad fa-compass"></i>Explore
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div class="profile-actions">
+                        <a href="{{ path("profile.index", {username: app.user.username}) }}" class="profile">
+                            <span class="avatar">{{ app.user.username|first }}</span>
+                            <span class="name">{{ app.user.username }}</span>
+                        </a>
+                        <a href="{{ path("app_logout") }}" class="nav-link logout">
+                            <i class="fad fa-sign-out"></i><span>Logout</span>
+                        </a>
+                    </div>
+                {% else %}
+                    <div class="auth-cta">
+                        <a href="{{ path("app_login") }}" class="btn btn-primary">Login</a>
+                        <a href="{{ path("app_register") }}" class="btn btn-ghost">Register</a>
+                    </div>
+                {% endif %}
+            </div>
 
         </nav>
     </div>

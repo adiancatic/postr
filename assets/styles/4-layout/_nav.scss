@@ -7,26 +7,79 @@ header {
     box-shadow: $bs-default;
 
     .nav-container {
-        height: 80px;
+        height: 60px;
         display: flex;
         align-items: center;
         justify-content: space-between;
+        transition: $tr-default;
+        @include mqf($bp-md) {
+            height: 80px;
+        }
     }
 
     .logo {
         display: block;
-        @include logo(102, 44);
+        @include logo(90, 38);
+        .logo {
+            @include mqf($bp-md) {
+                width: 102px;
+                height: 44px;
+            }
+        }
+    }
+
+    .nav-toggle {
+        .bar {
+            width: 1.5rem;
+            height: 1px;
+            background-color: $gray400;
+        }
+    }
+
+    .nav-inner {
+        display: flex;
+        flex-direction: column;
+        padding: 1.5rem;
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 100vw;
+        background-color: $white;
+        box-shadow: $bs-default;
+        transition: $tr-default;
+        @include mqf($bp-xs) {
+            width: 20rem;
+        }
+        @include mqf($bp-md) {
+            flex-direction: row;
+            position: static;
+            width: 100%;
+            box-shadow: none;
+            align-items: initial;
+            padding: 0;
+        }
     }
 
     .nav-list {
         display: flex;
+        flex-direction: column;
         flex: 1;
-        margin: 0 0 0 1.5rem;
         padding: 0;
         list-style: none;
+        margin: 0;
+        @include mqf($bp-md) {
+            flex-direction: row;
+            margin: 0 0 0 1.5rem;
+            align-items: center;
+        }
         .nav-item {
             &:not(:last-child) {
-                margin-right: 4px;
+                margin-bottom: 4px;
+                @include mqf($bp-md) {
+                    margin-bottom: 0;
+                    margin-right: 4px;
+                }
             }
         }
     }
@@ -47,6 +100,12 @@ header {
             background-color: $blue-dark-100;
             color: $blue-dark-700;
         }
+    }
+
+    .profile-actions {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
     }
 
     .profile {
@@ -85,13 +144,24 @@ header {
     }
 
     .logout {
-        width: 2.5rem;
         height: 2.5rem;
-        padding: 0;
         margin-left: 0.25rem;
         display: flex;
         align-items: center;
         justify-content: center;
+        width: auto;
+        padding: 0 1rem;
+        @include mqf($bp-md) {
+            padding: 0;
+            width: 2.5rem;
+        }
+        span {
+            margin-left: 0.5rem;
+            color: $gray600;
+            @include mqf($bp-md) {
+                display: none;
+            }
+        }
         i {
             margin: 0;
         }
