@@ -5,13 +5,15 @@
 {% block form %}
     <form method="post">
 
-        {% if app.user %}
-            <div class="mb-3">
-                You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
-            </div>
-        {% endif %}
+        <h3 class="auth-title">Sign in</h3>
+        <h5 class="auth-subtitle">
+            Don't have an account?
+            <a href="{{ path("register") }}" class="auth-subtitle-link">Register!</a>
+        </h5>
 
-        <h2 class="auth-title">Please sign in</h2>
+        {% if error %}
+            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
 
         <div class="form-row">
             <div class="col-12">
@@ -47,10 +49,6 @@
                 </div>
             </div>
         </div>
-
-        {% if error %}
-            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-        {% endif %}
 
     </form>
 {% endblock %}

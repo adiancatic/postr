@@ -26,13 +26,23 @@
     .auth-title {
         text-align: center;
     }
+    .auth-subtitle {
+        text-align: center;
+        font-size: 0.875rem;
+        font-weight: $fw-regular;
+        margin-bottom: 1.5rem;
+        .auth-subtitle-link {
+            color: $blue-dark;
+        }
+    }
 
+    .row-submit .form-group,
     .button-wrapper {
         display: flex;
         justify-content: center;
     }
 
     .alert {
-        margin-top: 1rem;
+        font-size: 0.875rem;
     }
 }

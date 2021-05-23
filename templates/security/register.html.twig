@@ -3,5 +3,32 @@
 {% block title %}Register!{% endblock %}
 
 {% block form %}
-    {{ form(form) }}
+    {{ form_start(form) }}
+
+    <h3 class="auth-title">Register</h3>
+    <h5 class="auth-subtitle">
+        Already have an account?
+        <a href="{{ path("app_login") }}" class="auth-subtitle-link">Log in!</a>
+    </h5>
+
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    <div class="row">
+        <div class="col-12">
+            {{ form_row(form.username) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            {{ form_row(form.password) }}
+        </div>
+    </div>
+    <div class="row row-submit">
+        <div class="col-12">
+            {{ form_row(form.Register) }}
+        </div>
+    </div>
+    {{ form_end(form) }}
 {% endblock %}
