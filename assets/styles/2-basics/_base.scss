@@ -1,6 +1,9 @@
 html {
     scroll-behavior: smooth;
-    font-size: 16px;
+    font-size: 14px;
+    @include mqf($bp-lg) {
+        font-size: 16px;
+    }
 }
 
 body {

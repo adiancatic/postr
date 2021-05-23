@@ -1,5 +1,8 @@
 .page-authentication {
-    padding-top: 4rem;
+    padding: 1rem;
+    @include mqf($bp-md) {
+        padding: 4rem 1rem 1rem;
+    }
 
     .container-wrapper {
         background-color: $white;
