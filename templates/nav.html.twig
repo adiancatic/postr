@@ -6,20 +6,20 @@
 
             <a href="{{ path("home") }}" class="logo"></a>
 
-            <ul class="nav-list">
-                <li class="nav-item">
-                    <a href="{{ path("home") }}" class="nav-link {{ page == "home" ? "active" }}">
-                        <i class="fad fa-home-alt"></i>Home
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="" class="nav-link">
-                        <i class="fad fa-compass"></i>Explore
-                    </a>
-                </li>
-            </ul>
-
             {% if app.user %}
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="{{ path("home") }}" class="nav-link {{ page == "home" ? "active" }}">
+                            <i class="fad fa-home-alt"></i>Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ path("explore") }}" class="nav-link {{ page == "explore" ? "active" }}">
+                            <i class="fad fa-compass"></i>Explore
+                        </a>
+                    </li>
+                </ul>
+
                 <a href="{{ path("profile.index", {username: app.user.username}) }}" class="profile">
                     <span class="avatar">{{ app.user.username|first }}</span>
                     <span class="name">{{ app.user.username }}</span>
