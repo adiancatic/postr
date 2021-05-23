@@ -10,14 +10,31 @@
     <a href="{{ path("profile.index", {"username": post.username}) }}" class="avatar">
         {{ post.username|first }}
     </a>
-    <div class="post">
+    <div class="post" data-id="{{ post.id }}">
         <div class="header">
             <div class="user-info">
                 <strong class="name">{{ post.username }}</strong>
                 <span class="username">@{{ post.username }}</span>
             </div>
             <div class="post-info">
-                <i class="far fa-clock"></i>{{ createdAtDate }}
+                <div class="post-created-at">
+                    <i class="far fa-clock"></i>{{ createdAtDate }}
+                </div>
+                {% if post.user == app.user.id %}
+                    <div class="dropdown post-actions">
+                        <button class="dropdown-toggle" type="button" data-toggle="dropdown">
+                            <i class="fal fa-ellipsis-v"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <button class="dropdown-item btn-edit" type="button" onclick="editPost(this)">
+                                Edit<i class="fad fa-pencil"></i>
+                            </button>
+                            <button class="dropdown-item btn-delete" type="button" onclick="deletePost(this)">
+                                Delete<i class="fad fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                {% endif %}
             </div>
         </div>
         <div class="body">{{ post.content }}</div>

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Post;
 use App\Repository\PostRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -34,7 +35,7 @@ class PostController extends AbstractController
         $params = [];
         parse_str($request->get("formData"), $params);
 
-        if(!$params) return new Response("Invalid request", 400);
+        if(!$params || !empty($params["content"])) return new Response("Invalid request", 400);
         $params = $params["post"];
 
         $post = new Post();
@@ -59,5 +60,57 @@ class PostController extends AbstractController
         ]);
 
         return new Response($return, 200);
+    }
+
+    /**
+     * @Route("/update", name="update", methods={"PUT"})
+     * @param Request $request
+     * @return Response
+     * @throws \Exception
+     */
+    public function update(Request $request) {
+        $params = [];
+        parse_str($request->get("formData"), $params);
+
+        if(!$params || empty($params["content"])) return new Response("Invalid request", 400);
+
+        $em = $this->getDoctrine()->getManager();
+
+        $post = $em->getRepository(Post::class)->find($params["postId"]);
+
+        if(!$post) {
+            throw $this->createNotFoundException('No post found for id ' . $params["postId"]);
+        }
+
+        $post->setContent($params["content"]);
+
+        $em->flush();
+
+        return new Response("Post successfully updated", 200);
+    }
+
+    /**
+     * @Route("/delete", name="delete", methods={"DELETE"})
+     * @param Request $request
+     * @return Response
+     * @throws \Exception
+     */
+    public function delete(Request $request) {
+        $postId = $request->get("postId");
+
+        if(!$postId) return new Response("Invalid request", 400);
+
+        $em = $this->getDoctrine()->getManager();
+
+        $post = $em->getRepository(Post::class)->find($postId);
+
+        if(!$post) {
+            throw $this->createNotFoundException('No post found for id ' . $postId);
+        }
+
+        $em->remove($post);
+        $em->flush();
+
+        return new Response("Post successfully deleted", 200);
     }
 }
