@@ -35,7 +35,11 @@ header {
         padding: 0.5rem 0.75rem;
         transition: $tr-default;
         color: $gray700;
+        font-size: 0.875rem;
+        display: inline-flex;
+        align-items: center;
         i {
+            font-size: 1rem;
             margin-right: 0.5rem;
         }
         &.active, &:hover, &:focus, &:active {
