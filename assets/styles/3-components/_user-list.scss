@@ -1,0 +1,14 @@
+.users-list {
+    background-color: $white;
+    border-radius: 1rem;
+    padding: 1.25rem 0.5rem;
+    .users-list-header {
+        margin-bottom: 0.5rem;
+        padding: 0 1rem;
+        .users-list-title {
+            font-weight: $fw-bold;
+            color: $gray900;
+            margin: 0;
+        }
+    }
+}

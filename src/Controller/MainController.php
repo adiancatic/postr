@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\Post;
 use App\Form\PostType;
 use App\Repository\PostRepository;
+use App\Repository\RelationshipRepository;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,10 +26,11 @@ class MainController extends AbstractController
      * @Route("/", name="home")
      * @param PostRepository $postRepository
      * @param Request $request
+     * @param UserRepository $userRepository
      * @return Response
      * @throws \Exception
      */
-    public function index(PostRepository $postRepository, Request $request): Response
+    public function index(PostRepository $postRepository, Request $request, UserRepository $userRepository): Response
     {
         $newPost = new Post();
 
@@ -51,9 +54,16 @@ class MainController extends AbstractController
             $posts = $postRepository->findAllWithAuthors();
         }
 
+        if($this->security->getUser()) {
+            $users = $userRepository->getFollowedUsers();
+        } else {
+            $users = [];
+        }
+
         return $this->render('main/index.html.twig', [
             "newPost" => $form->createView(),
-            'posts' => $posts,
+            "posts" => $posts,
+            "users" => $users,
         ]);
     }
 }

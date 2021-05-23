@@ -42,6 +42,9 @@ class PostRepository extends ServiceEntityRepository
 
     public function findAllWithAuthorsExceptCurrentUser()
     {
+        if(!$this->security->getUser()) {
+            return;
+        }
         return $this->getEntityManager()
             ->createQuery("
                     SELECT p.id, p.content, p.created_at, u.id as user, u.username
@@ -70,6 +73,9 @@ class PostRepository extends ServiceEntityRepository
 
     public function getPostsFromFollowedUsers($id)
     {
+        if(!$this->security->getUser()) {
+            return;
+        }
         $followedUsers = $this->getEntityManager()
             ->createQuery("
                     SELECT IDENTITY(r.followed)

@@ -1,0 +1,9 @@
+{% if user %}
+    <a href="{{ path("profile.index", {"username": user.username}) }}" class="user-item">
+        <span class="avatar">{{ user.username|first }}</span>
+        <div class="name-container">
+            <h5 class="name">{{ user.username }}</h5>
+            <small class="username">@{{ user.username }}</small>
+        </div>
+    </a>
+{% endif %}

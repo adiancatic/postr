@@ -6,6 +6,7 @@ use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -17,9 +18,13 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class UserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
 {
-    public function __construct(ManagerRegistry $registry)
+    protected $security;
+
+    public function __construct(ManagerRegistry $registry, Security $security)
     {
         parent::__construct($registry, User::class);
+
+        $this->security = $security;
     }
 
     /**
@@ -34,6 +39,52 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $user->setPassword($newEncodedPassword);
         $this->_em->persist($user);
         $this->_em->flush();
+    }
+
+    public function getFollowedUsers()
+    {
+        if(!$this->security->getUser()) {
+            return;
+        }
+        $followedUsers = $this->getEntityManager()
+            ->createQuery("
+                    SELECT IDENTITY(r.followed)
+                    FROM App\Entity\Relationship r
+                    WHERE r.follower = :current_user AND r.active = 1
+            ")
+            ->getDQL();
+
+        return $this->getEntityManager()
+            ->createQuery("
+                    SELECT u.id, u.username
+                    FROM App\Entity\User u
+                    WHERE u.id IN (" . $followedUsers . ")
+            ")
+            ->setParameters(["current_user" => $this->security->getUser()->getId()])
+            ->getResult();
+    }
+
+    public function getUsersYouDontFollow()
+    {
+        if(!$this->security->getUser()) {
+            return;
+        }
+        $followedUsers = $this->getEntityManager()
+            ->createQuery("
+                    SELECT IDENTITY(r.followed)
+                    FROM App\Entity\Relationship r
+                    WHERE r.follower = :current_user AND r.active = 1
+            ")
+            ->getDQL();
+
+        return $this->getEntityManager()
+            ->createQuery("
+                    SELECT u.id, u.username
+                    FROM App\Entity\User u
+                    WHERE u.id != :current_user OR u.id NOT IN (" . $followedUsers . ")
+            ")
+            ->setParameters(["current_user" => $this->security->getUser()->getId()])
+            ->getResult();
     }
 
     // /**

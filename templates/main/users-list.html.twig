@@ -1,0 +1,13 @@
+{% if users %}
+    <div class="users-list">
+        {% if usersListTitle is defined %}
+            <div class="users-list-header">
+                <h5 class="users-list-title">{{ usersListTitle }}</h5>
+            </div>
+        {% endif %}
+
+        {% for user in users %}
+            {{ include("main/user.html.twig") }}
+        {% endfor %}
+    </div>
+{% endif %}
