@@ -3,15 +3,29 @@
 {% block title %}Register!{% endblock %}
 
 {% block form %}
-    {{ form_start(form) }}
-
     <h3 class="auth-title">Register</h3>
     <h5 class="auth-subtitle">
         Already have an account?
         <a href="{{ path("app_login") }}" class="auth-subtitle-link">Log in!</a>
     </h5>
 
-    {% if error %}
+    {% for flashError in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+    {% endfor %}
+
+    {{ form_start(registrationForm) }}
+    {{ form_row(registrationForm.username) }}
+    {{ form_row(registrationForm.plainPassword) }}
+
+    <div class="button-wrapper">
+        <button type="submit" class="btn btn-primary">Register</button>
+    </div>
+    {{ form_end(registrationForm) }}
+
+
+{#    {{ form_start(form) }}#}
+
+{#    {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
 
@@ -30,5 +44,5 @@
             {{ form_row(form.Register) }}
         </div>
     </div>
-    {{ form_end(form) }}
+    {{ form_end(form) }}#}
 {% endblock %}
