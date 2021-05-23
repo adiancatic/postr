@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\Post;
 use App\Repository\PostRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -32,6 +31,10 @@ class PostController extends AbstractController
      */
     public function create(Request $request, PostRepository $postRepository)
     {
+        if(!$this->security->getUser()) {
+            throw $this->createNotFoundException("Page not found");
+        }
+
         $params = [];
         parse_str($request->get("formData"), $params);
 
@@ -69,6 +72,10 @@ class PostController extends AbstractController
      * @throws \Exception
      */
     public function update(Request $request) {
+        if(!$this->security->getUser()) {
+            throw $this->createNotFoundException("Page not found");
+        }
+
         $params = [];
         parse_str($request->get("formData"), $params);
 
@@ -96,6 +103,10 @@ class PostController extends AbstractController
      * @throws \Exception
      */
     public function delete(Request $request) {
+        if(!$this->security->getUser()) {
+            throw $this->createNotFoundException("Page not found");
+        }
+
         $postId = $request->get("postId");
 
         if(!$postId) return new Response("Invalid request", 400);

@@ -20,6 +20,7 @@ class ProfileController extends AbstractController
 {
     protected $userRepository;
     protected $relationshipRepository;
+    protected $security;
 
     protected $profileUser;
     protected $currentUser;
@@ -31,6 +32,8 @@ class ProfileController extends AbstractController
         $this->relationshipRepository = $relationshipRepository;
 
         $this->currentUser = $security->getUser();
+
+        $this->security = $security;
     }
 
     /**
@@ -41,6 +44,10 @@ class ProfileController extends AbstractController
      */
     public function follow(Request $request)
     {
+        if(!$this->security->getUser()) {
+            throw $this->createNotFoundException("Page not found");
+        }
+
         $id = $request->get("id");
         if(!$id) return new JsonResponse("Bad request", 400);
 
