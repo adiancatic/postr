@@ -20,7 +20,7 @@
                 <div class="post-created-at">
                     <i class="far fa-clock"></i>{{ createdAtDate }}
                 </div>
-                {% if post.user == app.user.id %}
+                {% if app.user and post.user == app.user.id %}
                     <div class="dropdown post-actions">
                         <button class="dropdown-toggle" type="button" data-toggle="dropdown">
                             <i class="fal fa-ellipsis-v"></i>

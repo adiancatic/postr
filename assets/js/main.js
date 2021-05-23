@@ -1,3 +1,9 @@
+$(document).ready(() => {
+
+    $(".nav-toggle").on("click", () => $(".nav-inner").toggleClass("js-active"));
+
+});
+
 window.followHandler = function followHandler(id) {
     $.post("/u/follow", {
         id: id

@@ -29,10 +29,28 @@ header {
     }
 
     .nav-toggle {
+        display: flex;
+        flex-direction: column;
+        background: none;
+        padding: 0;
+        border: 0;
+        @include mqf($bp-md) {
+            display: none;
+        }
         .bar {
             width: 1.5rem;
-            height: 1px;
+            height: 1.5px;
             background-color: $gray400;
+            border-radius: 10px;
+            transition: $tr-default;
+            &:not(:last-child) {
+                margin-bottom: 0.3rem;
+            }
+        }
+        &:hover, &:focus, &:active {
+            .bar {
+                background-color: $blue-dark;
+            }
         }
     }
 
@@ -45,6 +63,7 @@ header {
         right: 0;
         bottom: 0;
         width: 100vw;
+        transform: translateX(100%);
         background-color: $white;
         box-shadow: $bs-default;
         transition: $tr-default;
@@ -53,11 +72,83 @@ header {
         }
         @include mqf($bp-md) {
             flex-direction: row;
+            justify-content: flex-end;
             position: static;
             width: 100%;
             box-shadow: none;
             align-items: initial;
             padding: 0;
+            transform: translateX(0);
+        }
+        .nav-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            .nav-title {
+                margin: 0;
+            }
+            .nav-toggle {
+                width: 1.5rem;
+                height: 1.5rem;
+                position: relative;
+                .bar {
+                    width: auto;
+                    height: auto;
+                    background: none;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    bottom: 0;
+                    right: 0;
+                    display: flex;
+                    align-items: center;
+                    margin: 0;
+                    &::after {
+                        content: "";
+                        position: absolute;
+                        left: 0;
+                        right: 0;
+                        height: 1.5px;
+                        background-color: $gray400;
+                        transition: $tr-default;
+                    }
+                    &:first-child::after {
+                        transform: rotate(45deg);
+                    }
+                    &:last-child::after {
+                        transform: rotate(-45deg);
+                    }
+                }
+                &:hover, &:focus, &:active {
+                    .bar::after {
+                        background-color: $blue-dark;
+                    }
+                }
+            }
+            @include mqf($bp-md) {
+                display: none;
+            }
+        }
+        &.js-active {
+            transform: translateX(0);
+        }
+    }
+
+    .auth-cta {
+        display: flex;
+        flex-direction: column;
+        .btn {
+            &:not(:last-child) {
+                margin-bottom: 4px;
+                @include mqf($bp-md) {
+                    margin-bottom: 0;
+                    margin-right: 4px;
+                }
+            }
+        }
+        @include mqf($bp-md) {
+            flex-direction: row;
         }
     }
 
