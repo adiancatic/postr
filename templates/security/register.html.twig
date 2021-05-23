@@ -21,28 +21,4 @@
         <button type="submit" class="btn btn-primary">Register</button>
     </div>
     {{ form_end(registrationForm) }}
-
-
-{#    {{ form_start(form) }}#}
-
-{#    {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
-
-    <div class="row">
-        <div class="col-12">
-            {{ form_row(form.username) }}
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12">
-            {{ form_row(form.password) }}
-        </div>
-    </div>
-    <div class="row row-submit">
-        <div class="col-12">
-            {{ form_row(form.Register) }}
-        </div>
-    </div>
-    {{ form_end(form) }}#}
 {% endblock %}
