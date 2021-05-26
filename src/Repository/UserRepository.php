@@ -81,7 +81,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             ->createQuery("
                     SELECT u.id, u.username
                     FROM App\Entity\User u
-                    WHERE u.id != :current_user OR u.id NOT IN (" . $followedUsers . ")
+                    WHERE u.id != :current_user AND u.id NOT IN (" . $followedUsers . ")
             ")
             ->setParameters(["current_user" => $this->security->getUser()->getId()])
             ->getResult();
